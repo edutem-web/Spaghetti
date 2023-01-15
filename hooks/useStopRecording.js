@@ -34,7 +34,7 @@ const useStopRecording = () => {
         type: "audio/aac",
         name: "record.aac"
       });
-      formData.append("text", chunks.join(""));
+      formData.append("words", chunks);
       const response = await axios.post(Constants.API_ENDPOINT, formData, {
         headers: {
           "X-API-KEY": Constants.API_KEY,
@@ -49,6 +49,7 @@ const useStopRecording = () => {
       setIsLoading(false);
       setResultsScreenShown(true);
     } catch (error) {
+      logJSON(error);
       errorHandler("RECORDING_ERROR", error);
       setIsLoading(false);
     }
