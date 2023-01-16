@@ -22,15 +22,17 @@ const useStopRecording = () => {
   const deleteCache = useDeleteCache();
   const errorHandler = useErrorHandler();
   return async () => {
+    let audioPath;
     try {
       setIsLoading(true);
       const {path} = await SoundRecorder.stop();
+      audioPath = path;
       clearTimeout(timer);
       console.log("Timer cleared.");
-      console.log("Result saved in " + path);
+      console.log("Result saved in " + audioPath);
       const formData = new FormData();
       formData.append("audio", {
-        uri: "file://" + path,
+        uri: "file://" + audioPath,
         type: "audio/aac",
         name: "record.aac"
       });
@@ -49,9 +51,37 @@ const useStopRecording = () => {
       setIsLoading(false);
       setResultsScreenShown(true);
     } catch (error) {
-      logJSON(error);
-      errorHandler("RECORDING_ERROR", error);
-      setIsLoading(false);
+      if (error.status === null || error.code === "ERR_NETWORK") {
+        console.log("Responded with status null, retrying...");
+        const formData = new FormData();
+        formData.append("audio", {
+          uri: "file://" + audioPath,
+          type: "audio/aac",
+          name: "record.aac"
+        });
+        formData.append("words", chunks);
+        try {
+          const response = await axios.post(Constants.API_ENDPOINT, formData, {
+            headers: {
+              "X-API-KEY": Constants.API_KEY,
+              accept: "application/json",
+              "Content-Type": "multipart/form-data"
+            }
+          });
+          await deleteCache(audioPath);
+          const {data} = response;
+          logJSON(data);
+          setResults(data);
+          setIsLoading(false);
+          setResultsScreenShown(true);
+        } catch (error) {
+          logJSON(error);
+          setIsLoading(false);
+        }
+      } else {
+        errorHandler("RECORDING_ERROR", error);
+        setIsLoading(false);
+      }
     }
     setIsRecording(false);
   };
