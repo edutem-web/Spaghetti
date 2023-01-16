@@ -303,7 +303,7 @@ const RootScreen = () => {
     const onTap = () => {
         playSession();
     };
-    const onReplay = () => {
+    const onReplay = (callback) => {
         let formData = new FormData();
         formData.append("words", chunks);
         axios
@@ -330,6 +330,7 @@ const RootScreen = () => {
                                 if (error) {
                                     errorHandler("PLAY_SOUND_ERROR", error);
                                 } else {
+                                    callback();
                                     console.log("TTS Sound playing…");
                                     ttsSound.play(success => {
                                         if (success) {
