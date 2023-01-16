@@ -37,6 +37,8 @@ import Notice from "../components/Notice";
 import axios from "axios";
 import Constants from "../shared/Constants";
 import logJSON from "../utils/logJSON";
+import Sound from "react-native-sound";
+import RNFS from "react-native-fs";
 
 const RootScreen = () => {
   const deleteCache = useDeleteCache();
@@ -149,12 +151,39 @@ const RootScreen = () => {
                 }
               })
               .then(response => {
-                logJSON(response.data);
-                onTTSFinished();
-                setAlertChunk("");
+                console.log("Got TTS Response");
+                const ttsPath = RNFS.CachesDirectoryPath + "/tts.wav";
+                RNFS.writeFile(ttsPath, response.data, "base64")
+                  .then(success => {
+                    console.log("TTS File written");
+                    const ttsSound = new Sound(
+                      "tts.wav",
+                      RNFS.CachesDirectoryPath,
+                      error => {
+                        if (error) {
+                          errorHandler("PLAY_SOUND_ERROR", error);
+                        } else {
+                          console.log("TTS Sound playing…");
+                          ttsSound.play(success => {
+                            if (success) {
+                              ttsSound.release();
+                              onTTSFinished();
+                              setAlertChunk("");
+                            } else {
+                              errorHandler("AUDIO_DECODING_ERROR", error);
+                            }
+                          });
+                        }
+                      }
+                    );
+                  })
+                  .catch(error => {
+                    console.log("TTS file write error");
+                    onTTSFinished();
+                    setAlertChunk("");
+                  });
               })
               .catch(error => {
-                logJSON(error);
                 onTTSFinished();
                 setAlertChunk("");
               });
