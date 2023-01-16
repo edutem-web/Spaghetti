@@ -7,7 +7,10 @@ import Constants from "../../shared/Constants";
 
 const ResultsScreen = () => {
   const {results} = useContext(ResultsContext);
-  const sentenceScore = results.sentence_score;
+  const words = results.words;
+  const scores = words.map(word => word.score);
+  const averageScore = scores.reduce((a, b) => a + b, 0) / scores.length;
+  const sentenceScore = averageScore;
   if (sentenceScore >= Constants.GOOD_THRESHOLD) {
     return <ExcellentScreen />;
   } else if (sentenceScore >= Constants.MEDIOCRE_THRESHOLD) {
