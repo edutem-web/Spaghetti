@@ -151,7 +151,7 @@ const RootScreen = () => {
                                 console.log("Got TTS Response");
                                 const ttsPath = FileSystem.CachesDirectoryPath + "/tts.wav";
                                 FileSystem.writeFile(ttsPath, response.data, "base64")
-                                    .then(success => {
+                                    .then(_ => {
                                         console.log("TTS File written");
                                         const ttsSound = new Sound(
                                             "tts.wav",
@@ -174,13 +174,13 @@ const RootScreen = () => {
                                             }
                                         );
                                     })
-                                    .catch(error => {
+                                    .catch(_ => {
                                         console.log("TTS file write error");
                                         onTTSFinished();
                                         setAlertChunk("");
                                     });
                             })
-                            .catch(error => {
+                            .catch(_ => {
                                 onTTSFinished();
                                 setAlertChunk("");
                             });
@@ -240,7 +240,7 @@ const RootScreen = () => {
                                 .replace(/[^a-z]/g, "");
                         });
                         clearCache(croppedPaths)
-                            .then(response => {
+                            .then(_ => {
                                 if (refinedChunks[1] === "oo") {
                                     alert("oo", refinedChunks);
                                 } else if (refinedChunks[1] === "ow") {
@@ -253,7 +253,7 @@ const RootScreen = () => {
                                 logJSON(error);
                             });
                     })
-                    .catch(error => {
+                    .catch(_ => {
                         axios
                             .post(Constants.OCR_API_ENDPOINT, formData, {
                                 headers: {
@@ -278,7 +278,7 @@ const RootScreen = () => {
                                         .replace(/[^a-z]/g, "");
                                 });
                                 clearCache(croppedPaths)
-                                    .then(response => {
+                                    .then(_ => {
                                         if (refinedChunks[1] === "oo") {
                                             alert("oo", refinedChunks);
                                         } else if (refinedChunks[1] === "ow") {
@@ -321,7 +321,7 @@ const RootScreen = () => {
                 console.log("Got TTS Response");
                 const ttsPath = FileSystem.CachesDirectoryPath + "/tts.wav";
                 FileSystem.writeFile(ttsPath, response.data, "base64")
-                    .then(success => {
+                    .then(_ => {
                         console.log("TTS File written");
                         const ttsSound = new Sound(
                             "tts.wav",
@@ -345,13 +345,13 @@ const RootScreen = () => {
                             }
                         );
                     })
-                    .catch(error => {
+                    .catch(_ => {
                         console.log("TTS file write error");
                         onTTSFinished();
                         setAlertChunk("");
                     });
             })
-            .catch(error => {
+            .catch(_ => {
                 onTTSFinished();
                 setAlertChunk("");
             });
