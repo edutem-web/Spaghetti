@@ -37,13 +37,17 @@ const useStopRecording = () => {
         name: "record.aac"
       });
       formData.append("words", chunks);
-      const response = await axios.post(Constants.API_ENDPOINT, formData, {
-        headers: {
-          "X-API-KEY": Constants.API_KEY,
-          accept: "application/json",
-          "Content-Type": "multipart/form-data"
+      const response = await axios.post(
+        Constants.PRONUNCIATION_API_ENDPOINT,
+        formData,
+        {
+          headers: {
+            "X-API-KEY": Constants.API_KEY,
+            accept: "application/json",
+            "Content-Type": "multipart/form-data"
+          }
         }
-      });
+      );
       await deleteCache(path);
       const {data} = response;
       logJSON(data);
@@ -61,13 +65,17 @@ const useStopRecording = () => {
         });
         formData.append("words", chunks);
         try {
-          const response = await axios.post(Constants.API_ENDPOINT, formData, {
-            headers: {
-              "X-API-KEY": Constants.API_KEY,
-              accept: "application/json",
-              "Content-Type": "multipart/form-data"
+          const response = await axios.post(
+            Constants.PRONUNCIATION_API_ENDPOINT,
+            formData,
+            {
+              headers: {
+                "X-API-KEY": Constants.API_KEY,
+                accept: "application/json",
+                "Content-Type": "multipart/form-data"
+              }
             }
-          });
+          );
           await deleteCache(audioPath);
           const {data} = response;
           logJSON(data);
