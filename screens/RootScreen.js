@@ -9,7 +9,6 @@ import ChunkAnimationContext from "../contexts/ChunkAnimationContext";
 import DeviceVisibilityContext from "../contexts/DeviceVisibilityContext";
 import TakingPhotoAvailabilityContext from "../contexts/TakingPhotoAvailabilityContext";
 import {useCameraDevices} from "react-native-vision-camera/src";
-import Tts from "react-native-tts";
 import useCameraAndMicrophonePermissions from "../hooks/useCameraAndMicrophonePermissions";
 import useErrorHandler from "../hooks/useErrorHandler";
 import useOnTTSFinished from "../hooks/useOnTTSFinished";
@@ -307,8 +306,56 @@ const RootScreen = () => {
     playSession();
   };
   const onReplay = () => {
-    const joinedChunks = chunks.join("");
-    Tts.speak(joinedChunks);
+    let formData = new FormData();
+    formData.append("words", chunks);
+    axios
+      .post(Constants.TTS_API_ENDPOINT, formData, {
+        headers: {
+          "X-API-KEY": Constants.API_KEY,
+          accept: "application/json",
+          "Content-Type": "multipart/form-data",
+          "Cache-Control": "no-store",
+          Pragma: "no-store",
+          Expires: "0"
+        }
+      })
+      .then(response => {
+        console.log("Got TTS Response");
+        const ttsPath = RNFS.CachesDirectoryPath + "/tts.wav";
+        RNFS.writeFile(ttsPath, response.data, "base64")
+          .then(success => {
+            console.log("TTS File written");
+            const ttsSound = new Sound(
+              "tts.wav",
+              RNFS.CachesDirectoryPath,
+              error => {
+                if (error) {
+                  errorHandler("PLAY_SOUND_ERROR", error);
+                } else {
+                  console.log("TTS Sound playing…");
+                  ttsSound.play(success => {
+                    if (success) {
+                      ttsSound.release();
+                      onTTSFinished();
+                      setAlertChunk("");
+                    } else {
+                      errorHandler("AUDIO_DECODING_ERROR", error);
+                    }
+                  });
+                }
+              }
+            );
+          })
+          .catch(error => {
+            console.log("TTS file write error");
+            onTTSFinished();
+            setAlertChunk("");
+          });
+      })
+      .catch(error => {
+        onTTSFinished();
+        setAlertChunk("");
+      });
   };
   useEffect(() => {
     (async () => {
