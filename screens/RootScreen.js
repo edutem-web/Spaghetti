@@ -36,7 +36,7 @@ import axios from "axios";
 import Constants from "../shared/Constants";
 import logJSON from "../utils/logJSON";
 import Sound from "react-native-sound";
-import RNFS from "react-native-fs";
+import FileSystem from "react-native-fs";
 
 const RootScreen = () => {
     const deleteCache = useDeleteCache();
@@ -149,13 +149,13 @@ const RootScreen = () => {
                             })
                             .then(response => {
                                 console.log("Got TTS Response");
-                                const ttsPath = RNFS.CachesDirectoryPath + "/tts.wav";
-                                RNFS.writeFile(ttsPath, response.data, "base64")
+                                const ttsPath = FileSystem.CachesDirectoryPath + "/tts.wav";
+                                FileSystem.writeFile(ttsPath, response.data, "base64")
                                     .then(success => {
                                         console.log("TTS File written");
                                         const ttsSound = new Sound(
                                             "tts.wav",
-                                            RNFS.CachesDirectoryPath,
+                                            FileSystem.CachesDirectoryPath,
                                             error => {
                                                 if (error) {
                                                     errorHandler("PLAY_SOUND_ERROR", error);
@@ -319,13 +319,13 @@ const RootScreen = () => {
             })
             .then(response => {
                 console.log("Got TTS Response");
-                const ttsPath = RNFS.CachesDirectoryPath + "/tts.wav";
-                RNFS.writeFile(ttsPath, response.data, "base64")
+                const ttsPath = FileSystem.CachesDirectoryPath + "/tts.wav";
+                FileSystem.writeFile(ttsPath, response.data, "base64")
                     .then(success => {
                         console.log("TTS File written");
                         const ttsSound = new Sound(
                             "tts.wav",
-                            RNFS.CachesDirectoryPath,
+                            FileSystem.CachesDirectoryPath,
                             error => {
                                 if (error) {
                                     errorHandler("PLAY_SOUND_ERROR", error);
