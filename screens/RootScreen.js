@@ -130,11 +130,34 @@ const RootScreen = () => {
           () => {
             const middleChunk = phonemeToOrthographyMapper(refinedChunks[1]);
             wave();
-            Tts.speak(
-              [refinedChunks[0], middleChunk, refinedChunks[2]].join("")
-            );
-            onTTSFinished();
-            setAlertChunk("");
+            const combinedChunks = [
+              refinedChunks[0],
+              middleChunk,
+              refinedChunks[2]
+            ];
+            const formData = new FormData();
+            formData.append("words", combinedChunks);
+            axios
+              .post(Constants.TTS_API_ENDPOINT, formData, {
+                headers: {
+                  "X-API-KEY": Constants.API_KEY,
+                  accept: "application/json",
+                  "Content-Type": "multipart/form-data",
+                  "Cache-Control": "no-store",
+                  Pragma: "no-store",
+                  Expires: "0"
+                }
+              })
+              .then(response => {
+                logJSON(response.data);
+                onTTSFinished();
+                setAlertChunk("");
+              })
+              .catch(error => {
+                logJSON(error);
+                onTTSFinished();
+                setAlertChunk("");
+              });
           },
           true
         );
