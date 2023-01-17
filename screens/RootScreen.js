@@ -161,8 +161,9 @@ const RootScreen = () => {
                                                     errorHandler("PLAY_SOUND_ERROR", error);
                                                 } else {
                                                     console.log("TTS Sound playing…");
-                                                    ttsSound.setSpeed(0.5).play(success => {
+                                                    ttsSound.play(success => {
                                                         if (success) {
+                                                            console.log("TTS Sound played");
                                                             ttsSound.release();
                                                             onTTSFinished();
                                                             setAlertChunk("");
