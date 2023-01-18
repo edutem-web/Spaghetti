@@ -1,4 +1,4 @@
-import {Alert, Image, StyleSheet, Text, View} from "react-native";
+import {Alert, Image, Modal, StyleSheet, Text, View} from "react-native";
 import MaskedView from "@react-native-masked-view/masked-view";
 import {Camera} from "react-native-vision-camera";
 import {useContext, useEffect, useRef, useState} from "react";
@@ -83,6 +83,7 @@ const RootScreen = () => {
     setIsMicrophoneVisible(false);
     setAreMegaphonesVisible(false);
   };
+  const [isWarningModalVisible, setIsWarningModalVisible] = useState(false);
   const [_, setAlertChunk] = useState("");
   const alert = (type, refinedChunks) => {
     return Alert.alert("음소 선택", "음소를 선택하세요", [
@@ -296,6 +297,7 @@ const RootScreen = () => {
               })
               .catch(error => {
                 logJSON(error);
+                setIsWarningModalVisible(true);
               });
           });
       } catch (error) {
@@ -451,17 +453,18 @@ const RootScreen = () => {
         </View>
       )}
       {resultsScreenShown && <ResultsScreen />}
-      {/*<Modal*/}
-      {/*  animationType="slide"*/}
-      {/*  hardwareAccelerated={true}*/}
-      {/*  transparent={true}*/}
-      {/*  onRequestClose={() => {*/}
-      {/*    console.log("Modal has been closed.");*/}
-      {/*  }}>*/}
-      {/*  <View>*/}
-      {/*    <Text>Test Modal</Text>*/}
-      {/*  </View>*/}
-      {/*</Modal>*/}
+      <Modal
+        animationType="slide"
+        hardwareAccelerated={true}
+        visible={isWarningModalVisible}
+        transparent={true}
+        onRequestClose={() => {
+          console.log("Modal has been closed.");
+        }}>
+        <View style={styles.warningModal}>
+          <Image source={require("../assets/images/warning.png")} />
+        </View>
+      </Modal>
     </View>
   );
 };
@@ -470,6 +473,11 @@ const styles = StyleSheet.create({
   block: {
     backgroundColor: "black",
     flex: 1
+  },
+  warningModal: {
+    left: "50%",
+    top: "50%",
+    transform: [{translateX: -300}, {translateY: -150}]
   },
   rawTextContainer: {
     backgroundColor: "white"
