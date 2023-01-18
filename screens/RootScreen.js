@@ -137,6 +137,7 @@ const RootScreen = () => {
             const formData = new FormData();
             formData.append("words", combinedChunks);
             formData.append("volume", 2);
+            formData.append("as_base64", true);
             axios
               .post(Constants.TTS_API_ENDPOINT, formData, {
                 headers: {
