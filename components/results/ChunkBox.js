@@ -1,5 +1,4 @@
 import {Pressable, StyleSheet, View} from "react-native";
-import Star from "./Star";
 import Constants from "../../shared/Constants";
 import phonemeToOrthographyMapper from "../../utils/phonemeToOrthographyMapper";
 import phonemeToSignifierMapper from "../../utils/phonemeToSignifierMapper";
@@ -10,6 +9,7 @@ import Animated, {
   withRepeat,
   withTiming
 } from "react-native-reanimated";
+import Emoji from "./Emoji";
 
 const ChunkBox = ({chunk, grade, isFinalChunk = false}) => {
   let borderColor;
@@ -66,9 +66,7 @@ const ChunkBox = ({chunk, grade, isFinalChunk = false}) => {
         </Animated.Text>
       </View>
       <View style={styles.starContainer}>
-        <Star isFilled={grade >= 1} />
-        <Star isFilled={grade >= 2} />
-        <Star isFilled={grade >= 3} />
+        <Emoji level={grade} />
       </View>
     </Pressable>
   );
