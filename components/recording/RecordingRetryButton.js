@@ -1,5 +1,4 @@
 import {Image, StyleSheet, TouchableOpacity} from "react-native";
-import Constants from "../../shared/Constants";
 import Animated, {BounceIn, FadeOut} from "react-native-reanimated";
 import {useContext} from "react";
 import RecordingRetryContext from "../../contexts/RecordingRetryContext";
@@ -25,7 +24,10 @@ const RecordingRetryButton = () => {
       exiting={FadeOut}
       style={styles.retryButton}>
       <TouchableOpacity activeOpacity={0.5} onPress={onPress}>
-        <Image source={require("../../assets/images/retry.png")} />
+        <Image
+          source={require("../../assets/images/retry.png")}
+          style={styles.retryButtonImage}
+        />
       </TouchableOpacity>
     </Animated.View>
   );
@@ -36,8 +38,12 @@ const styles = StyleSheet.create({
     position: "absolute",
     width: 120,
     height: 120,
-    bottom: `${Constants.TOP_OFFSET * 50}%`,
-    left: "46%"
+    bottom: "15%",
+    left: "43%"
+  },
+  retryButtonImage: {
+    width: 120,
+    height: 120
   }
 });
 
