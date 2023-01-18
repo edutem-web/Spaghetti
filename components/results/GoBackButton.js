@@ -23,9 +23,9 @@ const GoBackButton = () => {
 
 const styles = StyleSheet.create({
   backButton: {
-    position: "relative",
-    top: 10,
-    left: 120,
+    position: "absolute",
+    bottom: 30,
+    right: 30,
     width: 43,
     height: 46
   }
