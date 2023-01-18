@@ -112,7 +112,7 @@ const styles = StyleSheet.create({
     justifyContent: "center"
   },
   text: {
-    fontFamily: "Poppins-Bold",
+    fontFamily: "efuture",
     fontSize: 120,
     color: Constants.PRIMARY_COLOR,
     letterSpacing: -5

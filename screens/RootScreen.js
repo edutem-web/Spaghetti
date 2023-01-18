@@ -448,6 +448,17 @@ const RootScreen = () => {
         </View>
       )}
       {resultsScreenShown && <ResultsScreen />}
+      {/*<Modal*/}
+      {/*  animationType="slide"*/}
+      {/*  hardwareAccelerated={true}*/}
+      {/*  transparent={true}*/}
+      {/*  onRequestClose={() => {*/}
+      {/*    console.log("Modal has been closed.");*/}
+      {/*  }}>*/}
+      {/*  <View>*/}
+      {/*    <Text>Test Modal</Text>*/}
+      {/*  </View>*/}
+      {/*</Modal>*/}
     </View>
   );
 };

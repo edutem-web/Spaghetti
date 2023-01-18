@@ -95,7 +95,7 @@ const styles = StyleSheet.create({
     alignItems: "center"
   },
   chunkText: {
-    fontFamily: "Poppins-Bold",
+    fontFamily: "efuture",
     color: "black",
     letterSpacing: -3,
     fontSize: 76

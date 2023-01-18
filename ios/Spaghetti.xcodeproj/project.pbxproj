@@ -99,6 +99,7 @@
 		3D5752182946D781008ED0B5 /* ai.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 3D5751D72946D781008ED0B5 /* ai.mp3 */; };
 		3D57521C294729F9008ED0B5 /* shutter.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 3D57521B294729F9008ED0B5 /* shutter.mp3 */; };
 		7699B88040F8A987B510C191 /* libPods-Spaghetti-SpaghettiTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 19F6CBCC0A4E27FBF8BF4A61 /* libPods-Spaghetti-SpaghettiTests.a */; };
+		55935C81E1CF45E39A8158BE /* efuture.otf in Resources */ = {isa = PBXBuildFile; fileRef = EB8669C2520B41209F0E43E8 /* efuture.otf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -216,6 +217,7 @@
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = Spaghetti/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		89C6BE57DB24E9ADA2F236DE /* Pods-Spaghetti-SpaghettiTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Spaghetti-SpaghettiTests.release.xcconfig"; path = "Target Support Files/Pods-Spaghetti-SpaghettiTests/Pods-Spaghetti-SpaghettiTests.release.xcconfig"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
+		EB8669C2520B41209F0E43E8 /* efuture.otf */ = {isa = PBXFileReference; name = "efuture.otf"; path = "../assets/fonts/efuture.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -381,6 +383,7 @@
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				BBD78D7AC51CEA395F1C20DB /* Pods */,
+				41FEF4CC96334EB9A0ECE263 /* Resources */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -406,6 +409,15 @@
 			);
 			path = Pods;
 			sourceTree = "<group>";
+		};
+		41FEF4CC96334EB9A0ECE263 /* Resources */ = {
+			isa = "PBXGroup";
+			children = (
+				EB8669C2520B41209F0E43E8 /* efuture.otf */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+			path = "";
 		};
 /* End PBXGroup section */
 
@@ -588,6 +600,7 @@
 				3D5752162946D781008ED0B5 /* sw.mp3 in Resources */,
 				3D5751902946A642008ED0B5 /* Poppins-SemiBold.ttf in Resources */,
 				3D57520F2946D781008ED0B5 /* h.mp3 in Resources */,
+				55935C81E1CF45E39A8158BE /* efuture.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
