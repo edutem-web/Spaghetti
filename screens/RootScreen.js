@@ -136,6 +136,7 @@ const RootScreen = () => {
             ];
             const formData = new FormData();
             formData.append("words", combinedChunks);
+            formData.append("volume", 2);
             axios
               .post(Constants.TTS_API_ENDPOINT, formData, {
                 headers: {
@@ -307,6 +308,7 @@ const RootScreen = () => {
   const onReplay = callback => {
     let formData = new FormData();
     formData.append("words", chunks);
+    formData.append("volume", 3);
     axios
       .post(Constants.TTS_API_ENDPOINT, formData, {
         headers: {
