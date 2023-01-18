@@ -8,7 +8,6 @@ import Animated, {
 } from "react-native-reanimated";
 import {StyleSheet, View} from "react-native";
 import {useEffect} from "react";
-import Constants from "../../shared/Constants";
 
 const SwellingMicrophone = () => {
   const scale = useSharedValue(1);
@@ -90,14 +89,14 @@ const styles = StyleSheet.create({
     position: "absolute",
     width: 300,
     height: 300,
-    bottom: `${Constants.TOP_OFFSET * -60}%`,
+    bottom: -65,
     left: "32%"
   },
   microphone: {
     position: "absolute",
     width: 120,
     height: 120,
-    bottom: `${Constants.TOP_OFFSET * 100}%`,
+    bottom: "5%",
     left: "43%"
   }
 });

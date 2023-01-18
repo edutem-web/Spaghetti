@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
     position: "absolute",
     width: 120,
     height: 120,
-    bottom: "15%",
+    bottom: "5%",
     left: "43%"
   },
   retryButtonImage: {

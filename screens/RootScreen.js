@@ -45,6 +45,7 @@ import Constants from "../shared/Constants";
 import logJSON from "../utils/logJSON";
 import Sound from "react-native-sound";
 import FileSystem from "react-native-fs";
+import LogContext from "../contexts/LogContext";
 
 const RootScreen = () => {
   const deleteCache = useDeleteCache();
@@ -93,10 +94,11 @@ const RootScreen = () => {
   };
   const [isWarningModalVisible, setIsWarningModalVisible] = useState(false);
   const [_, setAlertChunk] = useState("");
+  const {setLog} = useContext(LogContext);
   const alert = (type, refinedChunks) => {
-    return Alert.alert("음소 선택", "음소를 선택하세요", [
+    return Alert.alert("선택해주세요", "", [
       {
-        text: type === "oo" ? "oo (장모음)" : "ow (장모음)",
+        text: type === "oo" ? "oo (spoon)" : "ow (cow)",
         onPress: () => {
           switch (type) {
             case "oo":
@@ -110,7 +112,7 @@ const RootScreen = () => {
         style: "default"
       },
       {
-        text: type === "oo" ? "oo (단모음)" : "ow (단모음)",
+        text: type === "oo" ? "oo (foot)" : "ow (window)",
         onPress: () => {
           switch (type) {
             case "oo":
@@ -145,7 +147,7 @@ const RootScreen = () => {
             ];
             const formData = new FormData();
             formData.append("words", combinedChunks);
-            formData.append("volume", 2);
+            formData.append("volume", 1.4);
             formData.append("as_base64", true);
             axios
               .post(Constants.TTS_API_ENDPOINT, formData, {
@@ -305,6 +307,7 @@ const RootScreen = () => {
               })
               .catch(error => {
                 logJSON(error);
+                setLog(error.message);
                 setIsWarningModalVisible(true);
               });
           });
@@ -319,7 +322,7 @@ const RootScreen = () => {
   const onReplay = callback => {
     let formData = new FormData();
     formData.append("words", chunks);
-    formData.append("volume", 3);
+    formData.append("volume", 1.4);
     axios
       .post(Constants.TTS_API_ENDPOINT, formData, {
         headers: {

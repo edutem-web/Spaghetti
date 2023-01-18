@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
   },
   foxTrain: {
     position: "absolute",
-    bottom: 100,
+    top: 30,
     right: 10
   }
 });

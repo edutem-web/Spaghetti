@@ -16,7 +16,10 @@ const GoBackButton = () => {
       activeOpacity={0.5}
       style={styles.backButton}
       onPress={goBack}>
-      <Image source={require("../../assets/images/back.png")} />
+      <Image
+        source={require("../../assets/images/back.png")}
+        style={styles.goBackImage}
+      />
     </TouchableOpacity>
   );
 };
@@ -24,10 +27,12 @@ const GoBackButton = () => {
 const styles = StyleSheet.create({
   backButton: {
     position: "absolute",
-    bottom: 30,
-    right: 30,
-    width: 43,
-    height: 46
+    bottom: 10,
+    right: 30
+  },
+  goBackImage: {
+    width: 60,
+    height: 60
   }
 });
 
