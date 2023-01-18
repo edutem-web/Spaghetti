@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
   },
   elephant: {
     position: "absolute",
-    bottom: 30,
+    bottom: 100,
     right: 30
   },
   frog: {

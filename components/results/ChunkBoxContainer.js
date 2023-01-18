@@ -34,6 +34,8 @@ const ChunkBoxContainer = () => {
 
 const styles = StyleSheet.create({
   chunkBoxContainer: {
+    position: "relative",
+    top: 30,
     flex: 1,
     flexDirection: "row",
     justifyContent: "center",

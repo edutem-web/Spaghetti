@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
   },
   bonbon: {
     position: "absolute",
-    bottom: 30,
+    bottom: 100,
     right: 30
   }
 });
