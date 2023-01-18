@@ -1,4 +1,12 @@
-import {Alert, Image, Modal, StyleSheet, Text, View} from "react-native";
+import {
+  Alert,
+  Image,
+  Modal,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View
+} from "react-native";
 import MaskedView from "@react-native-masked-view/masked-view";
 import {Camera} from "react-native-vision-camera";
 import {useContext, useEffect, useRef, useState} from "react";
@@ -457,12 +465,19 @@ const RootScreen = () => {
         animationType="slide"
         hardwareAccelerated={true}
         visible={isWarningModalVisible}
-        transparent={true}
-        onRequestClose={() => {
-          console.log("Modal has been closed.");
-        }}>
+        transparent={true}>
         <View style={styles.warningModal}>
           <Image source={require("../assets/images/warning.png")} />
+          <TouchableOpacity
+            style={styles.dismissButton}
+            activeOpacity={0.5}
+            onPress={() => {
+              setIsWarningModalVisible(false);
+              setIsCameraVisible(true);
+              setIsTakingPhotoAvailable(true);
+            }}>
+            <Image source={require("../assets/images/dismiss.png")} />
+          </TouchableOpacity>
         </View>
       </Modal>
     </View>
@@ -478,6 +493,13 @@ const styles = StyleSheet.create({
     left: "50%",
     top: "50%",
     transform: [{translateX: -300}, {translateY: -150}]
+  },
+  dismissButton: {
+    position: "absolute",
+    width: 50,
+    height: 50,
+    top: -20,
+    right: 195
   },
   rawTextContainer: {
     backgroundColor: "white"
