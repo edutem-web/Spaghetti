@@ -36,7 +36,14 @@ const useStopRecording = () => {
         type: "audio/aac",
         name: "record.aac"
       });
-      formData.append("words", chunks);
+      let modifiedChunks = chunks;
+      if (chunks[1] === "ow(au)" || chunks[1] === "ow(ou)") {
+        modifiedChunks[1] = "ow";
+      }
+      if (chunks[1] === "oo(u)" || chunks[1] === "oo(uu)") {
+        modifiedChunks[1] = "oo";
+      }
+      formData.append("words", modifiedChunks);
       const response = await axios.post(
         Constants.PRONUNCIATION_API_ENDPOINT,
         formData,
