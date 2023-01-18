@@ -17,61 +17,64 @@ import RootScreen from "./screens/RootScreen";
 import {LoadingStatusContextProvider} from "./contexts/LoadingStatusContext";
 import {TimerContextProvider} from "./contexts/TimerContext";
 import {RecordingRetryContextProvider} from "./contexts/RecordingRetryContext";
+import {AudioPathContextProvider} from "./contexts/AudioPathContext";
 
 const App = () => {
-    const errorHandler = useErrorHandler();
-    const hideSplashScreen = async () => {
-        try {
-            await RNBootSplash.hide({
-                fade: true,
-                duration: 500
-            });
-        } catch (error) {
-            errorHandler("SPLASH_SCREEN_ERROR", error);
-        }
-    };
-    useEffect(() => {
-        hideSplashScreen()
-            .then(() => console.log("Splash screen hidden."))
-            .catch(error => errorHandler("SPLASH_SCREEN_ERROR", error));
-    }, []);
-    return (
-        <RecordingRetryContextProvider>
-            <TimerContextProvider>
-                <LoadingStatusContextProvider>
-                    <ResultsStatusContextProvider>
-                        <ResultsContextProvider>
-                            <RecordingStatusContextProvider>
-                                <ChunksRefsContextProvider>
-                                    <DevicePermissionContextProvider>
-                                        <ChunkAnimationContextProvider>
-                                            <DeviceVisibilityContextProvider>
-                                                <CroppedImagePathsContextProvider>
-                                                    <ChunksContextProvider>
-                                                        <TakingPhotoAvailabilityContextProvider>
-                                                            <GestureHandlerRootView style={styles.block}>
-                                                                <RootScreen/>
-                                                            </GestureHandlerRootView>
-                                                        </TakingPhotoAvailabilityContextProvider>
-                                                    </ChunksContextProvider>
-                                                </CroppedImagePathsContextProvider>
-                                            </DeviceVisibilityContextProvider>
-                                        </ChunkAnimationContextProvider>
-                                    </DevicePermissionContextProvider>
-                                </ChunksRefsContextProvider>
-                            </RecordingStatusContextProvider>
-                        </ResultsContextProvider>
-                    </ResultsStatusContextProvider>
-                </LoadingStatusContextProvider>
-            </TimerContextProvider>
-        </RecordingRetryContextProvider>
-    );
+  const errorHandler = useErrorHandler();
+  const hideSplashScreen = async () => {
+    try {
+      await RNBootSplash.hide({
+        fade: true,
+        duration: 500
+      });
+    } catch (error) {
+      errorHandler("SPLASH_SCREEN_ERROR", error);
+    }
+  };
+  useEffect(() => {
+    hideSplashScreen()
+      .then(() => console.log("Splash screen hidden."))
+      .catch(error => errorHandler("SPLASH_SCREEN_ERROR", error));
+  }, []);
+  return (
+    <AudioPathContextProvider>
+      <RecordingRetryContextProvider>
+        <TimerContextProvider>
+          <LoadingStatusContextProvider>
+            <ResultsStatusContextProvider>
+              <ResultsContextProvider>
+                <RecordingStatusContextProvider>
+                  <ChunksRefsContextProvider>
+                    <DevicePermissionContextProvider>
+                      <ChunkAnimationContextProvider>
+                        <DeviceVisibilityContextProvider>
+                          <CroppedImagePathsContextProvider>
+                            <ChunksContextProvider>
+                              <TakingPhotoAvailabilityContextProvider>
+                                <GestureHandlerRootView style={styles.block}>
+                                  <RootScreen />
+                                </GestureHandlerRootView>
+                              </TakingPhotoAvailabilityContextProvider>
+                            </ChunksContextProvider>
+                          </CroppedImagePathsContextProvider>
+                        </DeviceVisibilityContextProvider>
+                      </ChunkAnimationContextProvider>
+                    </DevicePermissionContextProvider>
+                  </ChunksRefsContextProvider>
+                </RecordingStatusContextProvider>
+              </ResultsContextProvider>
+            </ResultsStatusContextProvider>
+          </LoadingStatusContextProvider>
+        </TimerContextProvider>
+      </RecordingRetryContextProvider>
+    </AudioPathContextProvider>
+  );
 };
 
 const styles = StyleSheet.create({
-    block: {
-        flex: 1
-    }
+  block: {
+    flex: 1
+  }
 });
 
 export default App;

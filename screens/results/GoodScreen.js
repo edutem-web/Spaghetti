@@ -6,12 +6,46 @@ import {StyleSheet} from "react-native";
 import GoodBackground from "../../components/results/good/GoodBackground";
 import GoodText from "../../components/results/good/GoodText";
 import usePlaySound from "../../hooks/usePlaySound";
-import {useEffect} from "react";
+import {useContext, useEffect} from "react";
+import AudioPathContext from "../../contexts/AudioPathContext";
 
 const GoodScreen = () => {
+  const {audioPath} = useContext(AudioPathContext);
   const playSound = usePlaySound();
   useEffect(() => {
-    playSound("good", () => {});
+    // FileSystem.copyFile(
+    //   audioPath,
+    //   `${FileSystem.CachesDirectoryPath}/record.aac`
+    // )
+    //   .then(() => {
+    //     console.log(
+    //       "copy file success",
+    //       `${FileSystem.CachesDirectoryPath}/record.aac`
+    //     );
+    //     const recordSound = new Sound(
+    //       "record.aac",
+    //       FileSystem.CachesDirectoryPath,
+    //       error => {
+    //         if (error) {
+    //           console.log("failed to load your voice", error);
+    //           return;
+    //         }
+    //         recordSound.play(success => {
+    //           if (success) {
+    //             console.log("successfully finished playing your voice");
+    playSound("good", () => {
+      // TODO: NOTHING TO DO.
+    });
+    //         } else {
+    //           console.log("playback failed due to audio decoding errors");
+    //         }
+    //       });
+    //     }
+    //   );
+    // })
+    // .catch(error => {
+    //   console.log("copy file error", error);
+    // });
   }, []);
   return (
     <Animated.View style={styles.container} entering={FadeIn} exiting={FadeOut}>

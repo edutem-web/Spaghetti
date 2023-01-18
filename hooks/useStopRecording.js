@@ -8,18 +8,18 @@ import RecordingStatusContext from "../contexts/RecordingStatusContext";
 import ResultsContext from "../contexts/ResultsContext";
 import ResultsStatusContext from "../contexts/ResultsStatusContext";
 import LoadingStatusContext from "../contexts/LoadingStatusContext";
-import useDeleteCache from "./useDeleteCache";
 import TimerContext from "../contexts/TimerContext";
 import logJSON from "../utils/logJSON";
+import AudioPathContext from "../contexts/AudioPathContext";
 
 const useStopRecording = () => {
+  const {setAudioPath} = useContext(AudioPathContext);
   const {setIsLoading} = useContext(LoadingStatusContext);
   const {chunks} = useContext(ChunksContext);
   const {setResults} = useContext(ResultsContext);
   const {setIsRecording} = useContext(RecordingStatusContext);
   const {setResultsScreenShown} = useContext(ResultsStatusContext);
   const {timer} = useContext(TimerContext);
-  const deleteCache = useDeleteCache();
   const errorHandler = useErrorHandler();
   return async () => {
     let audioPath;
@@ -48,7 +48,6 @@ const useStopRecording = () => {
           }
         }
       );
-      await deleteCache(path);
       const {data} = response;
       logJSON(data);
       setResults(data);
@@ -76,7 +75,7 @@ const useStopRecording = () => {
               }
             }
           );
-          await deleteCache(audioPath);
+          setAudioPath(audioPath);
           const {data} = response;
           logJSON(data);
           setResults(data);
