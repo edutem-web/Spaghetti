@@ -3,6 +3,7 @@ import {
   Image,
   Modal,
   StyleSheet,
+  Text,
   TouchableOpacity,
   View
 } from "react-native";
@@ -405,6 +406,60 @@ const RootScreen = () => {
       <MicrophoneButton />
       {isRecording && <RecordingBackdrop />}
       {isLoading && <LoadingScreen />}
+
+      {/* BELOW IS THE DEBUGGING PART */}
+      {croppedImagePaths.length > 0 && !resultsScreenShown && (
+        <View
+          style={{
+            position: "absolute",
+            top: 0,
+            left: 0,
+            width: 100,
+            height: 300,
+            zIndex: 1,
+            flex: 1
+          }}>
+          <View
+            style={{
+              backgroundColor: "white"
+            }}>
+            <Text
+              style={{
+                fontSize: 16,
+                fontWeight: "bold"
+              }}>
+              {chunks.join(" ")}
+            </Text>
+          </View>
+          <Image
+            resizeMode={"contain"}
+            source={{
+              uri: "file://" + croppedImagePaths[0]
+            }}
+            style={{
+              flex: 1
+            }}
+          />
+          <Image
+            resizeMode={"contain"}
+            source={{
+              uri: "file://" + croppedImagePaths[1]
+            }}
+            style={{
+              flex: 1
+            }}
+          />
+          <Image
+            resizeMode={"contain"}
+            source={{
+              uri: "file://" + croppedImagePaths[2]
+            }}
+            style={{
+              flex: 1
+            }}
+          />
+        </View>
+      )}
       {resultsScreenShown && <ResultsScreen />}
       <Modal
         animationType="slide"
