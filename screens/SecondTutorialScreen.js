@@ -7,7 +7,6 @@ import Animated, {
   withTiming
 } from "react-native-reanimated";
 import {useEffect} from "react";
-import Sound from "react-native-sound";
 
 const SecondTutorialScreen = () => {
   const scale = useSharedValue(1);
@@ -38,24 +37,6 @@ const SecondTutorialScreen = () => {
       false
     );
   }, []);
-  useEffect(() => {
-    const interval = setInterval(() => {
-      const alphabetSound = new Sound("d.mp3", Sound.MAIN_BUNDLE, error => {
-        if (error) {
-          console.log("failed to load the sound", error);
-          return;
-        }
-        alphabetSound.play(success => {
-          if (success) {
-            console.log("successfully finished playing");
-          } else {
-            console.log("playback failed due to audio decoding errors");
-          }
-        });
-      });
-    }, 2700);
-    return () => clearInterval(interval);
-  }, []);
   return (
     <>
       <Image
@@ -66,7 +47,7 @@ const SecondTutorialScreen = () => {
         source={require("../assets/images/handtap.json")}
         autoPlay={true}
         loop={true}
-        speed={0.5}
+        speed={0.6}
         style={styles.handTap}
       />
       <Animated.Image
