@@ -8,6 +8,8 @@ import ChunkBoxContainer from "../../components/results/ChunkBoxContainer";
 import {useContext, useEffect} from "react";
 import usePlaySound from "../../hooks/usePlaySound";
 import AudioPathContext from "../../contexts/AudioPathContext";
+import Sound from "react-native-sound";
+import FileSystem from "react-native-fs";
 
 const ExcellentScreen = () => {
   const {audioPath} = useContext(AudioPathContext);
@@ -34,7 +36,23 @@ const ExcellentScreen = () => {
     //           if (success) {
     //             console.log("successfully finished playing your voice");
     playSound("excellent", () => {
-      // TODO: NOTHING TO DO.
+      const recordSound = new Sound(
+        "record.aac",
+        FileSystem.CachesDirectoryPath,
+        error => {
+          if (error) {
+            console.log("Failed to load the sound", error);
+          }
+          recordSound.setVolume(3.0);
+          recordSound.play(success => {
+            if (success) {
+              console.log("Successfully finished playing");
+            } else {
+              console.log("playback failed due to audio decoding errors");
+            }
+          });
+        }
+      );
     });
     //         } else {
     //           console.log("playback failed due to audio decoding errors");

@@ -56,6 +56,7 @@ const useStopRecording = () => {
         }
       );
       const {data} = response;
+
       logJSON(data);
       setResults(data);
       setIsLoading(false);
