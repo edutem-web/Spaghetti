@@ -1,7 +1,7 @@
 import {Image, StyleSheet, TouchableOpacity} from "react-native";
 import {useState} from "react";
 import RootScreen from "./RootScreen";
-import Lottie from "lottie-react-native";
+import SecondTutorialScreen from "./SecondTutorialScreen";
 
 const TutorialScreen = () => {
   const [tutorialStage, setTutorialStage] = useState(0);
@@ -20,20 +20,7 @@ const TutorialScreen = () => {
             style={styles.tutorialImage}
           />
         )}
-        {tutorialStage === 1 && (
-          <>
-            <Image
-              source={require("../assets/images/tutorial1.png")}
-              style={styles.tutorialImage}
-            />
-            <Lottie
-              source={require("../assets/images/handtap.json")}
-              autoPlay={true}
-              loop={true}
-              style={styles.handTap}
-            />
-          </>
-        )}
+        {tutorialStage === 1 && <SecondTutorialScreen />}
         {tutorialStage === 2 && (
           <Image
             source={require("../assets/images/tutorial2.png")}
@@ -62,19 +49,6 @@ const styles = StyleSheet.create({
     left: 0,
     bottom: 0,
     right: 0
-  },
-  handTap: {
-    transform: [
-      {
-        translateX: -75
-      },
-      {
-        translateY: 50
-      },
-      {
-        scale: 0.6
-      }
-    ]
   }
 });
 
