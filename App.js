@@ -18,7 +18,6 @@ import {LoadingStatusContextProvider} from "./contexts/LoadingStatusContext";
 import {TimerContextProvider} from "./contexts/TimerContext";
 import {RecordingRetryContextProvider} from "./contexts/RecordingRetryContext";
 import {AudioPathContextProvider} from "./contexts/AudioPathContext";
-import {LogContextProvider} from "./contexts/LogContext";
 
 const App = () => {
   const errorHandler = useErrorHandler();
@@ -38,39 +37,37 @@ const App = () => {
       .catch(error => errorHandler("SPLASH_SCREEN_ERROR", error));
   }, []);
   return (
-    <LogContextProvider>
-      <AudioPathContextProvider>
-        <RecordingRetryContextProvider>
-          <TimerContextProvider>
-            <LoadingStatusContextProvider>
-              <ResultsStatusContextProvider>
-                <ResultsContextProvider>
-                  <RecordingStatusContextProvider>
-                    <ChunksRefsContextProvider>
-                      <DevicePermissionContextProvider>
-                        <ChunkAnimationContextProvider>
-                          <DeviceVisibilityContextProvider>
-                            <CroppedImagePathsContextProvider>
-                              <ChunksContextProvider>
-                                <TakingPhotoAvailabilityContextProvider>
-                                  <GestureHandlerRootView style={styles.block}>
-                                    <RootScreen />
-                                  </GestureHandlerRootView>
-                                </TakingPhotoAvailabilityContextProvider>
-                              </ChunksContextProvider>
-                            </CroppedImagePathsContextProvider>
-                          </DeviceVisibilityContextProvider>
-                        </ChunkAnimationContextProvider>
-                      </DevicePermissionContextProvider>
-                    </ChunksRefsContextProvider>
-                  </RecordingStatusContextProvider>
-                </ResultsContextProvider>
-              </ResultsStatusContextProvider>
-            </LoadingStatusContextProvider>
-          </TimerContextProvider>
-        </RecordingRetryContextProvider>
-      </AudioPathContextProvider>
-    </LogContextProvider>
+    <AudioPathContextProvider>
+      <RecordingRetryContextProvider>
+        <TimerContextProvider>
+          <LoadingStatusContextProvider>
+            <ResultsStatusContextProvider>
+              <ResultsContextProvider>
+                <RecordingStatusContextProvider>
+                  <ChunksRefsContextProvider>
+                    <DevicePermissionContextProvider>
+                      <ChunkAnimationContextProvider>
+                        <DeviceVisibilityContextProvider>
+                          <CroppedImagePathsContextProvider>
+                            <ChunksContextProvider>
+                              <TakingPhotoAvailabilityContextProvider>
+                                <GestureHandlerRootView style={styles.block}>
+                                  <RootScreen />
+                                </GestureHandlerRootView>
+                              </TakingPhotoAvailabilityContextProvider>
+                            </ChunksContextProvider>
+                          </CroppedImagePathsContextProvider>
+                        </DeviceVisibilityContextProvider>
+                      </ChunkAnimationContextProvider>
+                    </DevicePermissionContextProvider>
+                  </ChunksRefsContextProvider>
+                </RecordingStatusContextProvider>
+              </ResultsContextProvider>
+            </ResultsStatusContextProvider>
+          </LoadingStatusContextProvider>
+        </TimerContextProvider>
+      </RecordingRetryContextProvider>
+    </AudioPathContextProvider>
   );
 };
 

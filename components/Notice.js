@@ -1,12 +1,11 @@
 import {StyleSheet, Text, View} from "react-native";
-import {useContext} from "react";
-import LogContext from "../contexts/LogContext";
 
 const Notice = () => {
-  const {log} = useContext(LogContext);
   return (
     <View style={styles.noticeContainer}>
-      <Text style={styles.noticeText}>{log}</Text>
+      <Text style={styles.noticeText}>
+        빛번짐, 반사가 없는, 조도가 균일한 환경에서 사용해주세요
+      </Text>
     </View>
   );
 };

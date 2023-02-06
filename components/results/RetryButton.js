@@ -27,7 +27,7 @@ const RetryButton = () => {
 const styles = StyleSheet.create({
   retryButton: {
     position: "absolute",
-    bottom: 5,
+    bottom: 0,
     left: "46%"
   }
 });
