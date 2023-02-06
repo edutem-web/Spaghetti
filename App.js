@@ -13,11 +13,11 @@ import RNBootSplash from "react-native-bootsplash";
 import useErrorHandler from "./hooks/useErrorHandler";
 import {ResultsContextProvider} from "./contexts/ResultsContext";
 import {ResultsStatusContextProvider} from "./contexts/ResultsStatusContext";
-import RootScreen from "./screens/RootScreen";
 import {LoadingStatusContextProvider} from "./contexts/LoadingStatusContext";
 import {TimerContextProvider} from "./contexts/TimerContext";
 import {RecordingRetryContextProvider} from "./contexts/RecordingRetryContext";
 import {AudioPathContextProvider} from "./contexts/AudioPathContext";
+import TutorialScreen from "./screens/TutorialScreen";
 
 const App = () => {
   const errorHandler = useErrorHandler();
@@ -52,7 +52,8 @@ const App = () => {
                             <ChunksContextProvider>
                               <TakingPhotoAvailabilityContextProvider>
                                 <GestureHandlerRootView style={styles.block}>
-                                  <RootScreen />
+                                  <TutorialScreen />
+                                  {/*<RootScreen />*/}
                                 </GestureHandlerRootView>
                               </TakingPhotoAvailabilityContextProvider>
                             </ChunksContextProvider>
